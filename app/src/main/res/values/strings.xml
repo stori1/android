@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">videoplay1</string>
+    <string name="moveTop">上移</string>
+    <string name="moveRight">右移</string>
+    <string name="moveLeft">左移</string>
+    <string name="moveDown">下移</string>
+</resources>

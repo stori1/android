@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.frd.hjc.videoplay1.MainActivity">
+
+    <LinearLayout
+        android:id="@+id/playLayout"
+        android:layout_width="match_parent"
+        android:layout_height="300dp">
+        <com.frd.hjc.videoplay1.MyGLSurfaceView
+            android:id="@+id/glSurface"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/singlePlay"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            android:text="Single"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp" />
+        <Button
+            android:id="@+id/SplicePlay"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            android:text="SPLICE"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp" />
+        <Button
+            android:id="@+id/stop"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            android:text="STOP"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="20dp"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:gravity="center_horizontal"
+            android:layout_height="50dp">
+            <Button
+                android:id="@+id/moveTop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/moveTop"
+                android:textSize="18sp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            android:layout_height="50dp">
+            <Button
+                android:id="@+id/moveLeft"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/moveLeft"
+                android:textSize="18sp" />
+            <LinearLayout
+                android:layout_width="100dp"
+                android:layout_height="match_parent">
+            </LinearLayout>
+            <Button
+                android:id="@+id/moveRight"
+                android:textSize="18sp"
+                android:text="@string/moveRight"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:gravity="center_horizontal"
+            android:layout_height="50dp">
+            <Button
+                android:id="@+id/moveDown"
+                android:text="@string/moveDown"
+                android:textSize="18sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>
