@@ -23,9 +23,9 @@ import static java.lang.Thread.sleep;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
+    private static final String LAG = "MainActivity";
     private MyGLSurfaceView mSurfaceView;
     private MyCodec mDecoder;
-    private ListenService.MyBinder mBinder;
     private Button SingleButton;
     private Button SpliceButton;
     private Button stopButton;
@@ -36,26 +36,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button downButton;
 
 
+    private Intent mIntent;
     private boolean isPlay;
 
-
-    private ServiceConnection connection = new ServiceConnection() {
-        @Override
-        public void onServiceConnected(ComponentName name, IBinder service) {
-            mBinder = (ListenService.MyBinder) service;
-            mBinder.listen();
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName name) {
-
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        requestPermission();
+        mIntent = new Intent(MainActivity.this, ListenService.class);
         mSurfaceView = findViewById(R.id.glSurface);
         SingleButton = findViewById(R.id.singlePlay);
         SpliceButton = findViewById(R.id.SplicePlay);
@@ -65,14 +55,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         rightButton = findViewById(R.id.moveRight);
         topButton = findViewById(R.id.moveTop);
         downButton = findViewById(R.id.moveDown);
-
         mSurfaceView = new MyGLSurfaceView(this);
         mDecoder = new MyCodec();
         MyApplication.needListen = true;
         MyApplication.deviceStatus = DeviceStatus.DEFAULT_MODE;
-        requestPermission();
-        Intent intent = new Intent(MainActivity.this, ListenService.class);
-        bindService(intent, connection, BIND_AUTO_CREATE);
         SpliceButton.setOnClickListener(this);
         SingleButton.setOnClickListener(this);
         stopButton.setOnClickListener(this);
@@ -129,14 +115,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onPause() {
         super.onPause();
         mSurfaceView.onPause();
-        unbindService(connection);
         MyApplication.deviceStatus = DeviceStatus.DEFAULT_MODE;
         MyApplication.needListen = false;
+        stopService(mIntent);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        startService(mIntent);
         startWork();
     }
 
@@ -158,13 +145,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void requestPermission(){
         int writePermissionCheck = ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
         int readPermissionCheck = ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE);
-        String[] permissions = new String[2];
+        int internet = ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.INTERNET);
+        String[] permissions = new String[3];
         permissions[0] = Manifest.permission.WRITE_EXTERNAL_STORAGE;
         permissions[1] = Manifest.permission.READ_EXTERNAL_STORAGE;
+        permissions[2] = Manifest.permission.INTERNET;
         //两者都没有权限。
-        if ((writePermissionCheck != 0) || (readPermissionCheck != 0)){
+        if ((writePermissionCheck != 0) || (readPermissionCheck != 0) || (internet != 0)){
             ActivityCompat.requestPermissions(MainActivity.this, permissions, 0);
         }
+
     }
 
     @Override

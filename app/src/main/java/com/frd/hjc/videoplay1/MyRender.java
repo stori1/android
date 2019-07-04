@@ -167,25 +167,9 @@ public class MyRender implements GLSurfaceView.Renderer, SurfaceTexture.OnFrameA
 //        Matrix.multiplyMM(mMVPMatrix, 0, mProjectionMatrix, 0, mViewMatrix, 0);
         surfaceTexture.updateTexImage();
         //修改纹理的坐标值，用于显示不同的区域
-//        if (texPositionChanged){
-////            float[] change = new float[8];
-////            change[0] = 0.0f;
-////            change[1] = 0.5f;
-////            change[2] = 0.5f;
-////            change[3] = 0.5f;
-////            change[4] = 0f;
-////            change[5] = 0f;
-////            change[6] = 0.5f;
-////            change[7] = 0f;
             this.fragmentBuffer.position(0);
             this.fragmentBuffer.put(MyApplication.fragmentData);
             this.fragmentBuffer.position(0);
-//            System.out.println("修改了 fragmentBuffer 的值");
-//        }else {
-//            this.fragmentBuffer.position(0);
-//            this.fragmentBuffer.put(this.fragmentPositionData);
-//            this.fragmentBuffer.position(0);
-//        }
 
         GLES20.glUseProgram(this.programHandle);
         GLES20.glEnableVertexAttribArray(this.vPosition);

@@ -8,5 +8,6 @@ public enum DeviceStatus {
     DEFAULT_MODE,
     SINGLE_MODE,
     SPLICE_MODE,
+    MOVE_MODE,
     REMOTE_MODE
 }

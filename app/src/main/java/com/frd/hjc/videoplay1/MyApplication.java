@@ -16,10 +16,10 @@ public class MyApplication extends Application{
     public static boolean needListen;
 
     public static float[] fragmentData = {
-            0f, 0.5f,
-            0.5f, 0.5f,
+            0f, 1f,
+            1f, 1f,
             0f, 0f,
-            0.5f, 0f
+            1f, 0f
     };
 
     @Override

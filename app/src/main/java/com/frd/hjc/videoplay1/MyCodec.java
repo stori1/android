@@ -82,7 +82,7 @@ public class MyCodec {
                     }
 
                     int outIndex = decoder.dequeueOutputBuffer(bufferInfo, 10000);
-                    switch(outIndex){
+                    switch(outIndex) {
                         case MediaCodec.INFO_OUTPUT_BUFFERS_CHANGED:
                             outputBuffers = decoder.getOutputBuffers();
                             break;
@@ -108,6 +108,7 @@ public class MyCodec {
 //                                } catch (InterruptedException e) {
 //                                    e.printStackTrace();
 //                                }
+//                            }
 
                             // frame rate control , about 24 frame/s
                             if ((bufferInfo.flags & MediaCodec.BUFFER_FLAG_KEY_FRAME) != 0 ){
@@ -120,6 +121,12 @@ public class MyCodec {
                                     } catch (InterruptedException e) {
                                         e.printStackTrace();
                                     }
+                                }
+                            }else {
+                                try {
+                                    Thread.sleep((long) (25));
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
                                 }
                             }
                             break;
